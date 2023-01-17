@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1079354496771-25afboirdl78atore3pjc29h195plep6.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1079354496771-25afboirdl78atore3pjc29h195plep6</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC-cAUofG8R8m72jbU8KNRJI5hnTfXlorU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1079354496771</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>vardant-it.AuthApplication</string>
+	<key>PROJECT_ID</key>
+	<string>authapplication-8cc92</string>
+	<key>STORAGE_BUCKET</key>
+	<string>authapplication-8cc92.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1079354496771:ios:b238e16f538e0e4a583b36</string>
+</dict>
+</plist>

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +15,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        FirebaseApp.configure()
+        
+        
+        print("1 - \(Validator.isValidEmail("1"))")
+        print("2 - \(Validator.isValidEmail("codebrah"))")
+        print("3 - \(Validator.isValidEmail("codebrah@"))")
+        print("4 - \(Validator.isValidEmail("codebrah@mail"))")
+        print("5 - \(Validator.isValidEmail("codebrah@gmail."))")
+        print("6 - \(Validator.isValidEmail("codebrah@gmail.com"))")
+        print("7 - \(Validator.isValidEmail("codebrah@@gmail.com"))")
+        print("8 - \(Validator.isValidEmail("codebrah@gmail...com"))")
+        
         return true
     }
 

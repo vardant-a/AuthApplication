@@ -11,8 +11,13 @@ final class MainViewController: UIViewController {
     
     private lazy var logOutButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("LogOut", for: .normal)
-        button.addTarget(self, action: #selector(tuppedLogOutButton), for: .touchUpInside)
+        button.setTitle("Log Out", for: .normal)
+        button.tintColor = UIColor.white
+        button.backgroundColor = UIColor.systemRed
+        button.layer.cornerRadius = 12
+        button.addTarget(self,
+                         action: #selector(tuppedLogOutButton),
+                         for: .touchUpInside)
         
         return button
     }()
@@ -51,7 +56,9 @@ private extension MainViewController {
         logOutButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             logOutButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            logOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            logOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logOutButton.heightAnchor.constraint(equalToConstant: 44),
+            logOutButton.widthAnchor.constraint(equalToConstant: 200)
         ])
     }
 }
