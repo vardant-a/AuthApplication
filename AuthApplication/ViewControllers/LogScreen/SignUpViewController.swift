@@ -6,10 +6,12 @@
 //
 
 import UIKit
-import FirebaseAuth
-import Firebase
+//import FirebaseAuth
+//import Firebase
 
 final class SignUpViewController: UIViewController {
+    
+    private let networkManager = NetworkManager.shared
     
     // MARK: - Private lazy Properties
     
@@ -83,26 +85,8 @@ private extension SignUpViewController {
             guard let email = emailTF.text else { return }
             guard let password = emailTF.text else { return }
             
-            Auth.auth().createUser(withEmail: email, password: password) {(result, err) in
-                if err != nil {
-                    print("Ошибка создания юзера")
-                    print(err?.localizedDescription ?? "174")
-                } else {
-                    let db = Firestore.firestore()
-                    
-                    db.collection("user")
-                        .addDocument(
-                            data: ["name": "Aleks",
-                                   "password": password,
-                                   "uid": result!.user.uid]
-                        ) { [unowned self]  (error) in
-                        dismiss(animated: true)
-                        if error != nil {
-                            print("Данные не сохранены User date couldn`t")
-                        }
-                    }
-                }
-            }
+            networkManager.createNewUser(email: email, password: password)
+            dismiss(animated: true)
         } else {
             showAlert("Error")
         }
@@ -136,7 +120,6 @@ private extension SignUpViewController {
             preferredStyle: .alert
         )
         let ok = UIAlertAction(title: "Ok", style: .cancel)
-        
         alert.addAction(ok)
         
         present(alert, animated: true)
