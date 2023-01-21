@@ -6,8 +6,6 @@
 //
 
 import UIKit
-//import FirebaseAuth
-//import Firebase
 
 final class SignUpViewController: UIViewController {
     
@@ -85,7 +83,7 @@ private extension SignUpViewController {
             guard let email = emailTF.text else { return }
             guard let password = emailTF.text else { return }
             
-            networkManager.createNewUser(email: email, password: password)
+            networkManager.createAccount(email: email, password: password)
             dismiss(animated: true)
         } else {
             showAlert("Error")

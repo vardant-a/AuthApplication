@@ -13,7 +13,7 @@ class NetworkManager {
     static let shared = NetworkManager()
     private let db = Firestore.firestore()
     
-    func createNewUser(email: String, password: String) {
+    func createAccount(email: String, password: String) {
         let animals: [Animal] = []
         
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
@@ -36,5 +36,17 @@ class NetworkManager {
                     }
             }
         }
+    }
+    
+    func signIn(email: String, password: String) {
+        
+    }
+    
+    func logOut() {
+        
+    }
+    
+    func deleteAccount() {
+        
     }
 }
