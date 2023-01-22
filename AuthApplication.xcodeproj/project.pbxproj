@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0E8B761A297B181500358E1A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8B7619297B181500358E1A /* NetworkManager.swift */; };
 		0E8B761D297B192200358E1A /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8B761C297B192200358E1A /* Animal.swift */; };
+		0E9FCC85297DBC13003C7679 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9FCC84297DBC13003C7679 /* UIViewController.swift */; };
 		0ED0350D2976C675000D8AD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED0350C2976C675000D8AD6 /* AppDelegate.swift */; };
 		0ED0350F2976C675000D8AD6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED0350E2976C675000D8AD6 /* SceneDelegate.swift */; };
 		0ED035112976C675000D8AD6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED035102976C675000D8AD6 /* MainViewController.swift */; };
@@ -23,9 +24,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0E8B7618297B17A800358E1A /* AuthApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AuthApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E8B7618297B17A800358E1A /* AuthApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = AuthApplication.app; path = "/Users/vardant/Personal/Develop/TestProjects/AuthApplication/build/Debug-iphoneos/AuthApplication.app"; sourceTree = "<absolute>"; };
 		0E8B7619297B181500358E1A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0E8B761C297B192200358E1A /* Animal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
+		0E9FCC84297DBC13003C7679 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		0ED0350C2976C675000D8AD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0ED0350E2976C675000D8AD6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0ED035102976C675000D8AD6 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -59,21 +61,30 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		0E9FCC83297DB5C6003C7679 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				0ED035332976D8B1000D8AD6 /* Validator.swift */,
+				0E8B7619297B181500358E1A /* NetworkManager.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		0ED035002976C675000D8AD6 = {
 			isa = PBXGroup;
 			children = (
 				0ED0350B2976C675000D8AD6 /* AuthApplication */,
-				0E8B7618297B17A800358E1A /* AuthApplication.app */,
 			);
 			sourceTree = "<group>";
 		};
 		0ED0350B2976C675000D8AD6 /* AuthApplication */ = {
 			isa = PBXGroup;
 			children = (
-				0E8B761B297B18FF00358E1A /* Models */,
-				0ED035322976D89A000D8AD6 /* Extensions */,
 				0ED035202976C683000D8AD6 /* Application */,
+				0E8B761B297B18FF00358E1A /* Models */,
+				0E9FCC83297DB5C6003C7679 /* Networking */,
 				0ED035212976C68A000D8AD6 /* ViewControllers */,
+				0ED035322976D89A000D8AD6 /* Extensions */,
 				0ED035152976C676000D8AD6 /* Assets.xcassets */,
 			);
 			path = AuthApplication;
@@ -120,8 +131,7 @@
 		0ED035322976D89A000D8AD6 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0ED035332976D8B1000D8AD6 /* Validator.swift */,
-				0E8B7619297B181500358E1A /* NetworkManager.swift */,
+				0E9FCC84297DBC13003C7679 /* UIViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -206,6 +216,7 @@
 			files = (
 				0ED035112976C675000D8AD6 /* MainViewController.swift in Sources */,
 				0E8B761D297B192200358E1A /* Animal.swift in Sources */,
+				0E9FCC85297DBC13003C7679 /* UIViewController.swift in Sources */,
 				0ED035252976C950000D8AD6 /* SignUpViewController.swift in Sources */,
 				0ED03536297713F9000D8AD6 /* SignInViewController.swift in Sources */,
 				0E8B761A297B181500358E1A /* NetworkManager.swift in Sources */,

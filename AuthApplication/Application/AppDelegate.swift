@@ -18,16 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
-        
-        print("1 - \(Validator.isValidEmail("1"))")
-        print("2 - \(Validator.isValidEmail("codebrah"))")
-        print("3 - \(Validator.isValidEmail("codebrah@"))")
-        print("4 - \(Validator.isValidEmail("codebrah@mail"))")
-        print("5 - \(Validator.isValidEmail("codebrah@gmail."))")
-        print("6 - \(Validator.isValidEmail("codebrah@gmail.com"))")
-        print("7 - \(Validator.isValidEmail("codebrah@@gmail.com"))")
-        print("8 - \(Validator.isValidEmail("codebrah@gmail...com"))")
-        
         return true
     }
 

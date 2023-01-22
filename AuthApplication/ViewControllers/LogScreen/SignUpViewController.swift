@@ -84,7 +84,8 @@ private extension SignUpViewController {
             guard let password = emailTF.text else { return }
             
             networkManager.createAccount(email: email, password: password)
-            dismiss(animated: true)
+            
+            navigationController?.dismiss(animated: true)
         } else {
             showAlert("Error")
         }
@@ -109,18 +110,6 @@ private extension SignUpViewController {
             """)
         
         return true
-    }
-    
-    func showAlert(_ message: String) {
-        let alert = UIAlertController(
-            title: message,
-            message: nil,
-            preferredStyle: .alert
-        )
-        let ok = UIAlertAction(title: "Ok", style: .cancel)
-        alert.addAction(ok)
-        
-        present(alert, animated: true)
     }
 }
 

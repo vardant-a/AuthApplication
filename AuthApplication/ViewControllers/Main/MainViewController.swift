@@ -9,6 +9,8 @@ import UIKit
 
 final class MainViewController: UIViewController {
     
+    private let networkManager = NetworkManager.shared
+    
     private lazy var logOutButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Log Out", for: .normal)
@@ -45,7 +47,9 @@ private extension MainViewController {
 
 private extension MainViewController {
     @objc func tuppedLogOutButton() {
-
+        networkManager.logOut()
+        
+        dismiss(animated: true)
     }
 }
 

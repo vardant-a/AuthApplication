@@ -6,10 +6,11 @@
 //
 
 import UIKit
-import FirebaseAuth
-import Firebase
+
 
 final class SignInViewController: UIViewController {
+    
+    private let networkManager = NetworkManager.shared
     
     // MARK: - Private lazy Properties
     
@@ -58,7 +59,7 @@ final class SignInViewController: UIViewController {
         button.backgroundColor = UIColor.systemBlue
         button.layer.cornerRadius = 12
         button.addTarget(self,
-                         action: #selector(tuppedSignUpButton),
+                         action: #selector(tuppedSignInButton),
                          for: .touchUpInside)
         
         return button
@@ -99,27 +100,28 @@ private extension SignInViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc func tuppedSignUpButton() {
+    @objc func tuppedSignInButton() {
         if checkDataTF() {
             guard let email = emailTF.text else { return }
             guard let password = emailTF.text else { return }
             
-            Auth.auth().createUser(withEmail: email, password: password) { (result, err) in
-                if err != nil {
-                    print("Ошибка создания юзера")
-                    print(err?.localizedDescription ?? "174")
-                } else {
-                    let db = Firestore.firestore()
-                    
-                    db.collection("user").addDocument(data: [
-                        "name": "Aleks",
-                        "password": password,
-                        "uid": result!.user.uid]) { (error) in
-                        if error != nil {
-                            print("Данные не сохранены User date couldn`t")
-                        }
-                    }
+            
+            networkManager.auth.signIn(withEmail: email,
+                                       password: password) { (authResult, error) in
+                
+                guard error == nil else {
+                    print("Error SignIn")
+                    print(error?.localizedDescription ?? "Error SignIn")
+                    return
                 }
+                
+                
+                guard let result = authResult else { return }
+                print(result.user.email ?? "email - not found")
+                print(result.user.uid)
+                print("user SignIn")
+                
+                self.showMainVC()
             }
         } else {
             showAlert("Error")
@@ -130,6 +132,15 @@ private extension SignInViewController {
     // MARK: - Private Methods
 
 private extension SignInViewController {
+    
+    func showMainVC() {
+        let vc = MainViewController()
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .fullScreen
+        
+        present(vc, animated: true)
+    }
+    
     func checkDataTF() -> Bool {
         if emailTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || passwordTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
             print("""
@@ -145,19 +156,6 @@ private extension SignInViewController {
             """)
         
         return true
-    }
-    
-    func showAlert(_ message: String) {
-        let alert = UIAlertController(
-            title: message,
-            message: nil,
-            preferredStyle: .alert
-        )
-        let ok = UIAlertAction(title: "Ok", style: .cancel)
-        
-        alert.addAction(ok)
-        
-        present(alert, animated: true)
     }
 }
 
