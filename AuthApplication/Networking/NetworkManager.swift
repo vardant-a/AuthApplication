@@ -11,59 +11,44 @@ import Firebase
 
 class NetworkManager {
     static let shared = NetworkManager()
+    private let auth = Auth.auth()
     private let db = Firestore.firestore()
-    let auth = Auth.auth()
+    private var verificationId: String?
+    
     private var statusAuth = false
     
-    func createAccount(email: String, password: String) {
-        let animals: [Animal] = []
-        
-        self.auth.createUser(withEmail: email, password: password) { (result, error) in
-            if error != nil {
-                print("Create user error")
-                print(error?.localizedDescription ?? "174")
-            } else {
-                self.db.collection("users")
-                    .addDocument(
-                        data: ["uid": result!.user.uid,
-                               "email": email,
-                               "password": password,
-                               "animals": animals
-                              ]
-                    ) { (error) in
-                        if error != nil {
-                            print("User date couldn`t")
-                            print(error ?? "191")
-                        }
-                    }
+    public func startAuth(phoneNumber: String, completion: @escaping(Bool) -> Void) {
+        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { [weak self] (verificationId, error) in
+            guard let verificationId = verificationId, error == nil else {
+                print(error!.localizedDescription)
+                completion(false)
+                return
             }
+            self?.verificationId = verificationId
+            completion(true)
         }
     }
     
-    func signIn(email: String, password: String) {
-        self.auth
-            .signIn(withEmail: email,
-                    password: password) { (authResult, error) in
-                
-                guard error == nil else {
-                    print("Error SignIn")
-                    print(error?.localizedDescription ?? "Error SignIn")
-                    return
-                }
-                
-                
-                guard let result = authResult else { return }
-                print(result.user.email ?? "email - not found")
-                print(result.user.uid)
-                print("user SignIn")
+    public func verityCode(smsCode: String, completion: @escaping(Bool) -> Void) {
+        guard let verificationId = verificationId else {
+            completion(false)
+            return
         }
-    }
-    
-    func checkStatusAuth(email: String, password: String) -> Bool {
-        signIn(email: email, password: password)
         
-        print("Cheack status Auth - \(statusAuth)")
-        return statusAuth
+        
+        let credential = PhoneAuthProvider.provider().credential(
+            withVerificationID: verificationId,
+            verificationCode: smsCode
+        )
+        
+        auth.signIn(with: credential) { result, error in
+            guard result != nil, error == nil else {
+                completion(false)
+                return
+            }
+            
+            completion(true)
+        }
     }
     
     func logOut() {

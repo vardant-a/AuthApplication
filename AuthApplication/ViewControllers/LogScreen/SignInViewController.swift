@@ -12,20 +12,10 @@ final class SignInViewController: UIViewController {
     
     private let networkManager = NetworkManager.shared
     
+    
     // MARK: - Private lazy Properties
     
-    private lazy var registrationButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Registration", for: .normal)
-        button.tintColor = .systemGray
-        button.backgroundColor = UIColor.black
-        button.layer.cornerRadius = 8
-        button.addTarget(self,
-                         action: #selector(tuppedRegistrationButton),
-                         for: .touchUpInside)
-        
-        return button
-    }()
+    private var statusAuth = false
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
@@ -49,17 +39,36 @@ final class SignInViewController: UIViewController {
         textField.borderStyle = .roundedRect
         textField.backgroundColor = .gray
         
+        textField.isEnabled = false
+        
         return textField
     }()
     
-    private lazy var signUpButton: UIButton = {
+    private lazy var getSMSCodeButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Sign In", for: .normal)
+        button.setTitle("Get SMS Code ->", for: .normal)
         button.tintColor = .white
         button.backgroundColor = UIColor.systemBlue
         button.layer.cornerRadius = 12
         button.addTarget(self,
-                         action: #selector(tuppedSignInButton),
+                         action: #selector(tuppedGetSMSCodeButton),
+                         for: .touchUpInside)
+        
+        return button
+    }()
+    
+    private lazy var verifyButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Verifycation", for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = UIColor.systemBlue
+        button.layer.cornerRadius = 12
+
+        button.isEnabled = false
+        button.isHidden = true
+        
+        button.addTarget(self,
+                         action: #selector(tuppedVerifyButton),
                          for: .touchUpInside)
         
         return button
@@ -79,12 +88,11 @@ final class SignInViewController: UIViewController {
 private extension SignInViewController {
     func setupView() {
         view.backgroundColor = UIColor(named: "BackgroundColor")
-        
-        view.addSubview(registrationButton)
         view.addSubview(imageView)
         view.addSubview(emailTF)
         view.addSubview(passwordTF)
-        view.addSubview(signUpButton)
+        view.addSubview(getSMSCodeButton)
+        view.addSubview(verifyButton)
         
         setupLayout()
     }
@@ -93,46 +101,60 @@ private extension SignInViewController {
     // MARK: - @Objc private Methods
 
 private extension SignInViewController {
-    @objc func tuppedRegistrationButton() {
-        let vc = SignUpViewController()
-        vc.modalPresentationStyle = .fullScreen
+    @objc func tuppedGetSMSCodeButton() {
+        emailTF.resignFirstResponder()
         
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    @objc func tuppedSignInButton() {
-        if checkDataTF() {
-            guard let email = emailTF.text else { return }
-            guard let password = emailTF.text else { return }
-            
-            
-            networkManager.auth.signIn(withEmail: email,
-                                       password: password) { (authResult, error) in
-                
-                guard error == nil else {
-                    print("Error SignIn")
-                    print(error?.localizedDescription ?? "Error SignIn")
+        if let content = emailTF.text, !content.isEmpty {
+            let number = "+7\(content)"
+            networkManager.startAuth(phoneNumber: number) { [weak self] success in
+                guard success else {
+                    self?.showAlert("Phone number not found")
                     return
                 }
                 
-                
-                guard let result = authResult else { return }
-                print(result.user.email ?? "email - not found")
-                print(result.user.uid)
-                print("user SignIn")
-                
-                self.showMainVC()
+                DispatchQueue.main.async {
+                    self?.switchStatusView()
+                }
             }
-        } else {
-            showAlert("Error")
+        }
+    }
+    
+    
+    func switchStatusView() {
+        getSMSCodeButton.isEnabled.toggle()
+        getSMSCodeButton.isHidden.toggle()
+        
+        verifyButton.isEnabled.toggle()
+        verifyButton.isHidden.toggle()
+        
+        emailTF.isEnabled.toggle()
+        passwordTF.isEnabled.toggle()
+    }
+    
+    @objc func tuppedVerifyButton() {
+        passwordTF.resignFirstResponder()
+        
+        if let smsCode = passwordTF.text, !smsCode.isEmpty {
+            
+            networkManager.verityCode(smsCode: smsCode) { [weak self] success in
+                
+                guard success else {
+                    self?.showAlert("Error smsCode")
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    self?.showMainVC()
+                }
+
+            }
         }
     }
 }
 
     // MARK: - Private Methods
 
-private extension SignInViewController {
-    
+extension SignInViewController {
     func showMainVC() {
         let vc = MainViewController()
         vc.modalTransitionStyle = .crossDissolve
@@ -140,36 +162,12 @@ private extension SignInViewController {
         
         present(vc, animated: true)
     }
-    
-    func checkDataTF() -> Bool {
-        if emailTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || passwordTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            print("""
-                Ошибка, login - \(emailTF.text ?? "Log"),
-                password - \(passwordTF.text ?? "pass")
-                """)
-            return false
-        }
-        
-        print("""
-            Отлично, login - \(emailTF.text ?? "Log"),
-            password - \(passwordTF.text ?? "pass")
-            """)
-        
-        return true
-    }
 }
 
     // MARK: - Layout
 
 private extension SignInViewController {
     func setupLayout() {
-        registrationButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            registrationButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            registrationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            registrationButton.widthAnchor.constraint(equalToConstant: 120)
-        ])
-        
         imageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
@@ -194,14 +192,21 @@ private extension SignInViewController {
             emailTF.widthAnchor.constraint(equalToConstant: 200)
         ])
         
-        signUpButton.translatesAutoresizingMaskIntoConstraints = false
+        getSMSCodeButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            signUpButton.topAnchor.constraint(equalTo: passwordTF.bottomAnchor, constant: 20),
-            signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            signUpButton.heightAnchor.constraint(equalToConstant: 44),
-            signUpButton.widthAnchor.constraint(equalToConstant: 200)
+            getSMSCodeButton.topAnchor.constraint(equalTo: passwordTF.bottomAnchor, constant: 20),
+            getSMSCodeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            getSMSCodeButton.heightAnchor.constraint(equalToConstant: 44),
+            getSMSCodeButton.widthAnchor.constraint(equalToConstant: 200)
         ])
+        
+        verifyButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            verifyButton.topAnchor.constraint(equalTo: passwordTF.bottomAnchor, constant: 20),
+            verifyButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            verifyButton.heightAnchor.constraint(equalToConstant: 44),
+            verifyButton.widthAnchor.constraint(equalToConstant: 200)
+        ])
+        
     }
 }
-
-
