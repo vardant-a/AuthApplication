@@ -15,8 +15,6 @@ class NetworkManager {
     private let db = Firestore.firestore()
     private var verificationId: String?
     
-    private var statusAuth = false
-    
     public func startAuth(phoneNumber: String, completion: @escaping(Bool) -> Void) {
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { [weak self] (verificationId, error) in
             guard let verificationId = verificationId, error == nil else {
@@ -34,7 +32,6 @@ class NetworkManager {
             completion(false)
             return
         }
-        
         
         let credential = PhoneAuthProvider.provider().credential(
             withVerificationID: verificationId,
@@ -61,6 +58,5 @@ class NetworkManager {
     }
     
     func deleteAccount() {
-        
     }
 }

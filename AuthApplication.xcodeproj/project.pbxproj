@@ -18,8 +18,7 @@
 		0ED0352D2976D4AD000D8AD6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED0352C2976D4AD000D8AD6 /* FirebaseAuth */; };
 		0ED0352F2976D4B9000D8AD6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED0352E2976D4B9000D8AD6 /* FirebaseFirestore */; };
 		0ED035312976D522000D8AD6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0ED035302976D522000D8AD6 /* GoogleService-Info.plist */; };
-		0ED035342976D8B1000D8AD6 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED035332976D8B1000D8AD6 /* Validator.swift */; };
-		0ED03536297713F9000D8AD6 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED03535297713F9000D8AD6 /* SignInViewController.swift */; };
+		0ED03536297713F9000D8AD6 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED03535297713F9000D8AD6 /* AuthViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,8 +33,7 @@
 		0ED035182976C676000D8AD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0ED0351A2976C676000D8AD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0ED035302976D522000D8AD6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		0ED035332976D8B1000D8AD6 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
-		0ED03535297713F9000D8AD6 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		0ED03535297713F9000D8AD6 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +60,6 @@
 		0E9FCC83297DB5C6003C7679 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				0ED035332976D8B1000D8AD6 /* Validator.swift */,
 				0E8B7619297B181500358E1A /* NetworkManager.swift */,
 			);
 			path = Networking;
@@ -121,7 +118,7 @@
 		0ED035232976C88E000D8AD6 /* LogScreen */ = {
 			isa = PBXGroup;
 			children = (
-				0ED03535297713F9000D8AD6 /* SignInViewController.swift */,
+				0ED03535297713F9000D8AD6 /* AuthViewController.swift */,
 			);
 			path = LogScreen;
 			sourceTree = "<group>";
@@ -215,9 +212,8 @@
 				0ED035112976C675000D8AD6 /* MainViewController.swift in Sources */,
 				0E8B761D297B192200358E1A /* Animal.swift in Sources */,
 				0E9FCC85297DBC13003C7679 /* UIViewController.swift in Sources */,
-				0ED03536297713F9000D8AD6 /* SignInViewController.swift in Sources */,
+				0ED03536297713F9000D8AD6 /* AuthViewController.swift in Sources */,
 				0E8B761A297B181500358E1A /* NetworkManager.swift in Sources */,
-				0ED035342976D8B1000D8AD6 /* Validator.swift in Sources */,
 				0ED0350D2976C675000D8AD6 /* AppDelegate.swift in Sources */,
 				0ED0350F2976C675000D8AD6 /* SceneDelegate.swift in Sources */,
 			);
