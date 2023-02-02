@@ -79,8 +79,6 @@ private extension MainViewController {
 private extension MainViewController {
     @objc func tuppedLogOutButton() {
         networkManager.logOut()
-        
-        dismiss(animated: true)
     }
 }
 

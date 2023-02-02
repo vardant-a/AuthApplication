@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E8A92A6298C455000853FD0 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8A92A5298C455000853FD0 /* AppSettings.swift */; };
+		0E8A92A9298C459A00853FD0 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8A92A8298C459A00853FD0 /* Appearance.swift */; };
 		0E8B761A297B181500358E1A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8B7619297B181500358E1A /* NetworkManager.swift */; };
 		0E8B761D297B192200358E1A /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8B761C297B192200358E1A /* Animal.swift */; };
 		0E9FCC85297DBC13003C7679 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9FCC84297DBC13003C7679 /* UIViewController.swift */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E8A92A5298C455000853FD0 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		0E8A92A8298C459A00853FD0 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		0E8B7619297B181500358E1A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0E8B761C297B192200358E1A /* Animal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
 		0E9FCC84297DBC13003C7679 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +53,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E8A92A7298C458A00853FD0 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0E8A92A5298C455000853FD0 /* AppSettings.swift */,
+				0E8A92A8298C459A00853FD0 /* Appearance.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		0E8B761B297B18FF00358E1A /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -82,6 +95,7 @@
 				0ED035212976C68A000D8AD6 /* ViewControllers */,
 				0ED035322976D89A000D8AD6 /* Extensions */,
 				0ED035152976C676000D8AD6 /* Assets.xcassets */,
+				0E8A92A7298C458A00853FD0 /* Helpers */,
 			);
 			path = AuthApplication;
 			sourceTree = "<group>";
@@ -210,11 +224,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0ED035112976C675000D8AD6 /* MainViewController.swift in Sources */,
+				0E8A92A9298C459A00853FD0 /* Appearance.swift in Sources */,
 				0E8B761D297B192200358E1A /* Animal.swift in Sources */,
 				0E9FCC85297DBC13003C7679 /* UIViewController.swift in Sources */,
 				0ED03536297713F9000D8AD6 /* AuthViewController.swift in Sources */,
 				0E8B761A297B181500358E1A /* NetworkManager.swift in Sources */,
 				0ED0350D2976C675000D8AD6 /* AppDelegate.swift in Sources */,
+				0E8A92A6298C455000853FD0 /* AppSettings.swift in Sources */,
 				0ED0350F2976C675000D8AD6 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
